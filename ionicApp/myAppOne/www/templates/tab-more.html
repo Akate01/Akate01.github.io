@@ -1,0 +1,53 @@
+<ion-view view-title="课程列表" hide-nav-bar="true">
+	<div class="bar bar-header item-input-inset">
+	  <label class="item-input-wrapper">
+	    <i class="icon ion-ios-search placeholder-icon"></i>
+	    <input type="search" placeholder="请输入搜索词">
+	  </label>
+	</div>
+	<div class="bar bar-subheader row">
+	  <a class="button button-light col col-40" ng-click="toggle()">课程列表
+	  	<i class="icon icon-right ion-android-arrow-dropdown"></i>
+	  </a>
+	  <a class="button button-light col col-40" ng-click="toggle()">价格参考
+	  	 <i class="icon icon-right ion-android-arrow-dropdown"></i>
+	  </a>
+	</div>
+  <ion-content class="has-header has-subheader">
+  	<!--下拉刷新-->
+  	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+  	
+    <ion-list ng-show="myList">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
+        <img ng-src="{{chat.face}}">
+        <h2>{{chat.name}}</h2>
+        <p>{{chat.lastText}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="remove(chat)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+    <ion-list ng-show="!myList">
+    	<ion-item item-center>
+    		<p style="line-height: 50px;text-align: left;">
+    			Lorem ipsum dolor sit amet,  <br />
+    			consectetur adipisicing elit.  <br />
+    			Explicabo quisquam iure magni  <br />
+    			quos inventore enim quo molestiae  <br />
+    			tempore  vero saepe omnis nam quasi <br />
+    			in temporibus voluptate dicta numquam <br />
+    			laudantium quia.<br />
+    		</p>
+    	</ion-item>
+    </ion-list>
+    <!--<上拉加载-->
+     <ion-infinite-scroll ng-if="!noMorePage" immediate-check="false" on-infinite="loadMore()" distance="1%" ></ion-infinite-scroll>
+  	
+  </ion-content>
+   <button class="button-clear" ng-click="scrollTop()">
+  	 	<i class="icon tabs-icon-top ion-chevron-up"></i>
+  	 	回到顶部
+  	 </button>
+</ion-view>
